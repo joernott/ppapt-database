@@ -23,9 +23,9 @@ CREATE TABLE characters (
 
 ALTER TABLE characters
   ADD PRIMARY KEY (character_id),
-  ADD KEY character_role (roles),
-  ADD KEY character_user (users),
-  ADD KEY campaign (campaigns);
+  ADD KEY character_role (character_role),
+  ADD KEY character_user (character_user),
+  ADD KEY campaign (campaign);
 
 CREATE TABLE roles (
   role_id   int NOT NULL,
@@ -47,7 +47,7 @@ ALTER TABLE users
   ADD PRIMARY KEY (email);
 
 
-ALTER TABLE campaign
+ALTER TABLE campaigns
   ADD CONSTRAINT rel_campaigns_characters FOREIGN KEY (campaign_id) REFERENCES characters (campaign);
 
 ALTER TABLE characters
