@@ -10,7 +10,7 @@ CREATE TABLE campaigns (
   game_round    int NOT NULL
 );
 
-ALTER TABLE campaigns ADD PRIMARY KEY (campaign_id, campaign_id);
+ALTER TABLE campaigns ADD PRIMARY KEY (campaign_id);
 
 CREATE TABLE characters (
   character_id   varchar(36) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE characters (
   character_role int NOT NULL
 );
 
-ALTER TABLE characters ADD PRIMARY KEY (character_id, character_id);
+ALTER TABLE characters ADD PRIMARY KEY (character_id);
 CREATE INDEX ON characters.character_role;
 CREATE INDEX ON characters.character_user;
 CREATE INDEX ON characters.campaign;
@@ -30,7 +30,7 @@ CREATE TABLE roles (
   role_name varchar(32) NOT NULL
 );
 
-ALTER TABLE roles ADD PRIMARY KEY (role_id, role_id);
+ALTER TABLE roles ADD PRIMARY KEY (role_id);
 
 CREATE TABLE users (
   email         varchar(128) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE users (
 );
 
 
-ALTER TABLE users ADD PRIMARY KEY (email, email);
+ALTER TABLE users ADD PRIMARY KEY (email);
 
 
 ALTER TABLE campaigns
