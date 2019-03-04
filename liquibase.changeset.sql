@@ -43,14 +43,14 @@ create table users (
 alter table users add primary key (email);
 
 
-alter table campaigns
-  add constraint rel_campaigns_characters foreign key (campaign_id) references characters (campaign) on update cascade on delete restrict;
+alter table characters
+  add constraint rel_campaigns_characters foreign key (campaign) references campaigns (campaign_id) on update cascade on delete restrict;
 
 alter table characters
   add constraint rel_characters_roles foreign key (character_role) references roles (role_id)  on update cascade on delete restrict;
 
-alter table users
-  add constraint rel_users_characters foreign key (email) references characters (character_user)  on update cascade on delete restrict;
+alter table characters
+  add constraint rel_users_characters foreign key (character_user) references users (email)  on update cascade on delete restrict;
 
 
 --changeset joernott:2 failOnError=true
