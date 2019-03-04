@@ -5,9 +5,9 @@
 CREATE TABLE campaign (
   campaignid varchar(36) NOT NULL,
   name varchar(128) NOT NULL,
-  startdate bigint unsigned NOT NULL,
-  campaignday bigint unsigned NOT NULL,
-  gameround int unsigned NOT NULL
+  startdate bigint NOT NULL,
+  campaignday bigint NOT NULL,
+  gameround int NOT NULL
 );
 
 ALTER TABLE campaign
@@ -18,7 +18,7 @@ CREATE TABLE characters (
   user varchar(128) NOT NULL,
   campaign varchar(36) NOT NULL,
   name varchar(128) NOT NULL,
-  role int UNSIGNED NOT NULL
+  role int NOT NULL
 );
 
 ALTER TABLE characters
@@ -28,7 +28,7 @@ ALTER TABLE characters
   ADD KEY campaign (campaign);
 
 CREATE TABLE role (
-  roleid int UNSIGNED NOT NULL,
+  roleid int NOT NULL,
   name varchar(32) NOT NULL
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE user (
   email varchar(128) NOT NULL,
   username varchar(64) NOT NULL,
   password varchar(60) NOT NULL,
-  locked tinyint NOT NULL
+  locked boolean NOT NULL
 );
 
 
