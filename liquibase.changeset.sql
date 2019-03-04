@@ -5,9 +5,9 @@
 CREATE TABLE campaign (
   campaignid varchar(36) NOT NULL,
   name varchar(128) NOT NULL,
-  startdate bigint UNSIGNED NOT NULL,
-  campaignday bigint UNSIGNED NOT NULL,
-  gameround int UNSIGNED NOT NULL
+  startdate bigint unsigned NOT NULL,
+  campaignday bigint unsigned NOT NULL,
+  gameround int unsigned NOT NULL
 );
 
 ALTER TABLE campaign
