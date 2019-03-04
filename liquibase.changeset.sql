@@ -2,60 +2,60 @@
 
 --changeset joernott:1 failOnError=true
 
-CREATE TABLE campaigns (
-  campaign_id   varchar(36) NOT NULL,
-  campaign_name varchar(128) NOT NULL,
-  startdate     bigint NOT NULL,
-  campaign_day  bigint NOT NULL,
-  game_round    int NOT NULL
+create table campaigns (
+  campaign_id   varchar(36) not null,
+  campaign_name varchar(128) not null,
+  startdate     bigint not null,
+  campaign_day  bigint not null,
+  game_round    int not null
 );
 
-ALTER TABLE campaigns ADD PRIMARY KEY (campaign_id);
+alter table campaigns add primary key (campaign_id);
 
-CREATE TABLE characters (
-  character_id   varchar(36) NOT NULL,
-  character_user varchar(128) NOT NULL,
-  campaign       varchar(36) NOT NULL,
-  character_name varchar(128) NOT NULL,
-  character_role int NOT NULL
+create table characters (
+  character_id   varchar(36) not null,
+  character_user varchar(128) not null,
+  campaign       varchar(36) not null,
+  character_name varchar(128) not null,
+  character_role int not null
 );
 
-ALTER TABLE characters ADD PRIMARY KEY (character_id);
-CREATE INDEX character_role ON characters(character_role);
-CREATE INDEX character_user ON characters(character_user);
-CREATE INDEX campaign ON characters(campaign);
+alter table characters add primary key (character_id);
+create index character_role ON characters(character_role);
+create index character_user ON characters(character_user);
+create index campaign ON characters(campaign);
 
-CREATE TABLE roles (
-  role_id   int NOT NULL,
-  role_name varchar(32) NOT NULL
+create table roles (
+  role_id   int not null,
+  role_name varchar(32) not null
 );
 
-ALTER TABLE roles ADD PRIMARY KEY (role_id);
+alter table roles add primary key (role_id);
 
-CREATE TABLE users (
-  email         varchar(128) NOT NULL,
-  user_name     varchar(64) NOT NULL,
-  user_password varchar(60) NOT NULL,
-  user_locked   boolean NOT NULL
+create table users (
+  email         varchar(128) not null,
+  user_name     varchar(64) not null,
+  user_password varchar(60) not null,
+  user_locked   boolean not null
 );
 
 
-ALTER TABLE users ADD PRIMARY KEY (email);
+alter table users add primary key (email);
 
 
-ALTER TABLE campaigns
-  ADD CONSTRAINT rel_campaigns_characters FOREIGN KEY (campaign_id) REFERENCES characters (campaign) ON UPDATE CASCADE ON DELETE RESTRICT;
+alter table campaigns
+  add constraint rel_campaigns_characters foreign key (campaign_id) references characters (campaign) on update cascade on delete restrict;
 
-ALTER TABLE characters
-  ADD CONSTRAINT rel_characters_roles FOREIGN KEY (character_role) REFERENCES roles (role_id)  ON UPDATE CASCADE ON DELETE RESTRICT;
+alter table characters
+  add constraint rel_characters_roles foreign key (character_role) references roles (role_id)  on update cascade on delete restrict;
 
-ALTER TABLE users
-  ADD CONSTRAINT rel_users_characters FOREIGN KEY (email) REFERENCES characters (character_user)  ON UPDATE CASCADE ON DELETE RESTRICT;
+alter table users
+  add constraint rel_users_characters foreign key (email) references characters (character_user)  on update cascade on delete restrict;
 
 
 --changeset joernott:2 failOnError=true
 
-INSERT INTO roles (role_id, role_name) VALUES
+insert into roles (role_id, role_name) VALUES
 (0, 'Gamemaster'),
 (1, 'Player'),
 (2, 'Dead character'),
