@@ -21,9 +21,9 @@ CREATE TABLE characters (
 );
 
 ALTER TABLE characters ADD PRIMARY KEY (character_id);
-CREATE INDEX ON characters(character_role);
-CREATE INDEX ON characters(character_user);
-CREATE INDEX ON characters(campaign);
+CREATE INDEXcharacter_role ON characters(character_role);
+CREATE INDEX character_user ON characters(character_user);
+CREATE INDEX campaign ON characters(campaign);
 
 CREATE TABLE roles (
   role_id   int NOT NULL,
