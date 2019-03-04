@@ -5,10 +5,10 @@
 CREATE TABLE campaign (
   campaignid varchar(36) NOT NULL,
   name varchar(128) NOT NULL,
-  startdate bigint(20) UNSIGNED NOT NULL,
-  campaignday bigint(20) UNSIGNED NOT NULL,
-  round int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  startdate bigint UNSIGNED NOT NULL,
+  campaignday bigint UNSIGNED NOT NULL,
+  gameround int UNSIGNED NOT NULL
+);
 
 ALTER TABLE campaign
   ADD PRIMARY KEY (campaignid);
@@ -18,8 +18,8 @@ CREATE TABLE characters (
   user varchar(128) NOT NULL,
   campaign varchar(36) NOT NULL,
   name varchar(128) NOT NULL,
-  role int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  role int UNSIGNED NOT NULL
+);
 
 ALTER TABLE characters
   ADD PRIMARY KEY (characterid),
@@ -28,9 +28,9 @@ ALTER TABLE characters
   ADD KEY campaign (campaign);
 
 CREATE TABLE role (
-  roleid int(10) UNSIGNED NOT NULL,
+  roleid int UNSIGNED NOT NULL,
   name varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 ALTER TABLE role
   ADD PRIMARY KEY (roleid);
@@ -39,8 +39,8 @@ CREATE TABLE user (
   email varchar(128) NOT NULL,
   username varchar(64) NOT NULL,
   password varchar(60) NOT NULL,
-  locked tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  locked tinyint NOT NULL
+);
 
 
 ALTER TABLE user
