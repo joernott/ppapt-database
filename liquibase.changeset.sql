@@ -113,6 +113,7 @@ create table hexes(
   terrain_type_id int not null,
   player_notes    clob,
   gm_notes        clob,
+  city_name       varchar(128)
 );
 
 alter table hexess add primary key (campaign_id, hex_id);
@@ -122,6 +123,19 @@ alter table hexes
 
 alter table hexes
   add constraint rel_terrain_types_hexes foreign key (terrain_type_id) references terrain_types (terrain_type_id) on update cascade on delete restrict;
+
+create_table city_districts(
+  campaign_id   uuid not null,
+  hex_id        varchar(10) not null,
+  district_id   uuid not null,
+  district_name varchar(128),
+);
+
+alter table city_districts add primary key (campaign_id, hex_id, district_id);
+
+alter table city_districts
+  add constraint rel_hexes_districts foreign key (campaign_id, hex_id) references hexes (campaign_id, hex_id) on update cascade on delete restrict;
+
 
 create table government_roles(
   govrole_id   int not null,
@@ -177,15 +191,18 @@ alter table actions
 
 
 create table logs (
-  log_id        uuid not null,
-  campaign_id   uuid not null,
-  turn_id       int not null,
-  action_id      uuid not null,
-  hex_id        varchar(10) not null,
-  character_id  uuid defaultvalue='',
-  duration      int not null,
-  cancel_log_id uuid defaultvalue='',
-  notes         clob
+  log_id                  uuid not null,
+  campaign_id             uuid not null,
+  turn_id                 int not null,
+  action_id               uuid not null,
+  hex_id                  varchar(10) defaultvalue='',
+  district_id             uuid defaultvalue=''',
+  district_coordinates_ul varchar(2) = '',
+  district_coordinates_lr varchar(2) = '',
+  character_id            uuid defaultvalue='',
+  duration                int not null,
+  cancel_log_id           uuid defaultvalue='',
+  notes                   clob
 );
 
 alter table logs add primary key (log_id);
@@ -200,7 +217,5 @@ alter table logs
   add constraint rel_actions_logs foreign key (action_id) references actions (action_id) on update cascade on delete restrict;
 
 alter table logs
-  add constraint rel_hexes_logs foreign key (hex_id) references hexess (hex_id) on update cascade on delete restrict;
-
-alter table logs
   add constraint rel_characters_logs foreign key (character_id) references characters (character_id) on update cascade on delete restrict;
+
