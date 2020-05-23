@@ -60,3 +60,45 @@ insert into roles (role_id, role_name) VALUES
 (1, 'Player'),
 (2, 'Dead character'),
 (3, 'Guest character');
+
+-- changeset joernott:3 failOnError=true
+
+create table turns (
+  campaign_id   varchar(36) not null,
+  turn_id       int not null,
+  game_round    int not null,
+  duration      int not null
+);
+
+alter table turns add primary key (campaign_id, turn_id);
+
+alter table campaigns drop column campaign_day;
+  
+alter table campaigns drop column game_round;
+
+alter table turns
+  add constraint rel_campaigns_turns foreign key (campaign_id) references campaigns (campaign_id) on update cascade on delete restrict;
+
+create table actiontypes (
+  actiontype_id int not null;
+  actiontype_name varchar(32);
+);
+
+alter table actiontypes add primary key (actiontype_id);
+
+insert into actiontypes (actiontypes_id, actiontypes_name) VALUES
+(0, 'Income'),
+(1, 'Population'),
+(2, 'Function'),
+(3, 'Leave Function'),
+(4, 'Kingdom Alignment');
+
+
+
+create table logs (
+  entry_id      varchar(36) not null,
+  campaign_id   varchar(36) not null,
+  turn_id       int not null,
+  action        varchar(255) not null,
+  duration      int not null,
+);
