@@ -179,6 +179,8 @@ create table actions(
   economy            int defaultvalue=0,
   stability          int defaultvalue=0,
   unrest             int defaultvalue=0,
+  building_size_x    int defaultvalue=0,
+  building_size_y    int defaultvalue=0
 );
 
 alter table actions add primary key (action_id);
